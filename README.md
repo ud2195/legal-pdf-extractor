@@ -31,12 +31,6 @@ flowchart TD
     P --> Q["Return structured response"]
 ```
 
-The cache is keyed by the SHA-256 hash of the normalized PDF bytes. That means
-the first extraction call for a document pays the parse/index cost, while later
-queries against the same PDF can reuse the cached FAISS index and metadata.
-Chunk text stored in FAISS metadata is contextualized for retrieval, while the
-original Docling chunk text is preserved as `metadata.raw_text`.
-
 ## Design Decisions
 
 ### PDF Normalization
@@ -214,6 +208,12 @@ The OpenAI model and cache directory are code defaults in
 `legal_pdf_extractor.config`.
 
 ## Usage
+
+Sample legal PDFs for testing are available at:
+
+```text
+/Users/ud2195/legal-pdf-extractor/CUAD_v1/full_contract_pdf
+```
 
 CLI:
 
