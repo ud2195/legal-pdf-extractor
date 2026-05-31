@@ -220,8 +220,8 @@ CLI:
 ```bash
 uv run legal-pdf-extract extract \
   --pdf path/to/contract.pdf \
-  --query "Who is the tenant?" \
-  --output-type string
+  --query "List the named tenants involved ?" \
+  --output-type "array[string]"
 ```
 
 Python:
