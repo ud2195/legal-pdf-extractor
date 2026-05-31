@@ -266,7 +266,7 @@ Supported output types:
 Notebook:
 
 ```bash
-uv run jupyter notebook demos/notebooks/end_to_end_demonstration.ipynb
+uv run jupyter notebook demos/notebooks/test_notebook.ipynb
 ```
 
 Streamlit:
