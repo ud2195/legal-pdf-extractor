@@ -263,6 +263,8 @@ Supported output types:
 
 ## Demos
 
+![Demo output](./demo-output.png)
+
 Notebook:
 
 ```bash
