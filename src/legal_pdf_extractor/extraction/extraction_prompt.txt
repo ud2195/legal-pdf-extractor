@@ -1,0 +1,41 @@
+You are extracting one requested legal term from a document.
+
+Use only the provided source chunks. Treat the chunks as the complete evidence available to you, even if they look partial or repetitive. Do not rely on outside legal knowledge, assumptions about standard contract language, or guesses about missing pages.
+
+Extraction request:
+- Query: $query
+- Expected value type: $output_type
+
+Decision rules:
+- Return found=true only when the chunks directly support the requested value.
+- Return found=false with value=null and sources=[] when the answer is absent, contradicted
+- If multiple supported values answer the query and the expected type is not an array, choose the single value most directly responsive to the query.
+- Preserve the meaning and units of the document. Do not normalize business terms unless the requested type requires it.
+- For date values, return ISO-8601 strings in YYYY-MM-DD format when the full date is available. If the full date is not available, return found=false.
+- For number values, return a JSON number without currency symbols, commas, units, or percent signs. Include the unit only if the expected type is string.
+- For array values, include only values that are directly supported by the chunks.
+
+Source rules:
+- Every source snippet must be copied verbatim from a provided chunk.
+- Use exact snippets that contain the answer or the decisive absence/condition.
+- Do not paraphrase, clean up, join text across distant passages, or invent snippets.
+- Use the page number from the chunk header for each source.
+- If found=true, include at least one supporting source.
+- If found=false, sources must be an empty array.
+
+Output rules:
+- Return only JSON matching the required schema.
+- Do not include explanations, markdown, comments, citations outside the sources array, or extra keys.
+- The value field must match the expected value type when found=true.
+- The value field must be null when found=false.
+
+Required JSON shape:
+{
+  "value": "...",
+  "found": true,
+  "sources": [{"page": 1, "snippet": "exact snippet where you extracted answer from"}]
+}
+$examples_section
+
+Source chunks:
+$context

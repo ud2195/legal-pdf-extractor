@@ -1,0 +1,50 @@
+[project]
+name = "legal-pdf-extractor"
+version = "0.1.0"
+description = "Hash-cached legal PDF extraction with typed answers and source attribution."
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "docling>=2.96.0",
+    "docling-core[chunking-openai]>=2.77.1",
+    "faiss-cpu>=1.14.2",
+    "openai>=2.38.0",
+    "pydantic>=2.13.4",
+    "python-dotenv>=1.2.2",
+    "rank-bm25>=0.2.2",
+    "rapidfuzz>=3.14.5",
+    "rich>=15.0.0",
+    "tenacity>=8.1.0",
+    "typer>=0.21.2",
+]
+
+[project.scripts]
+legal-pdf-extract = "legal_pdf_extractor.cli:app"
+
+[build-system]
+requires = ["uv_build>=0.11.17,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "jupyter>=1.1.1",
+    "mypy>=2.1.0",
+    "pytest>=9.0.3",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.15.15",
+    "streamlit>=1.58.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = [".agents"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+extend-ignore = ["B008"]
+
+[tool.mypy]
+python_version = "3.12"
+packages = ["legal_pdf_extractor"]
+ignore_missing_imports = true
+strict = false
